@@ -1,0 +1,13 @@
+type Identity @entity {
+  id: ID!
+  address: Bytes!
+  keys: [Key!]! @derivedFrom(field: "identity")
+}
+
+type Key @entity {
+  id: ID!
+  keyType: BigInt!
+  key: Bytes!
+  purposes: [Int!]!
+  identity: Identity!
+}
