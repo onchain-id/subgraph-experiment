@@ -20,8 +20,40 @@ An [OpenGraph](https://thegraph.com/) protococol [SubGraph](https://thegraph.com
   - Run `yarn run create-local`
   - Run `yarn run build`
   - Run `yarn run deploy-local`
+  
+### Queries
+
+#### Retrieve all claims from an Issuer and their related identities
+
+```graphql
+{
+  claims(where: { issuer: "0x15e2e228c1436de0982f1f30a7bd727cefd02fdc" }) {
+    id
+    identity {
+      id
+      keys {
+        key
+        purposes
+      }
+    }
+  }
+}
+```
+
+#### Retrieve all identities on which a key has at least a CLAIM right
+
+```graphql
+{
+  keys(where: { key: "0xf55f3179051ae85efb896e039be2b2537fe704a11c7bdbf407c5ee20a7fe54bf", purposes_contains: [3] }) {
+    identity {
+      address
+    }
+    purposes
+  }
+}
+```
  
- ## How to create a new SubGraph (quick start)
+## How to create a new SubGraph (quick start)
 - Init a new project `npm init`
 - Set up the `package.json` scripts. (Note, graph-cli might be required depending on your operating system and node configuration. If scripts commands don't work, try installing `yarn global add @graphprotocol/graph-cli`.)
   
