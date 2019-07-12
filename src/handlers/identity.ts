@@ -1,14 +1,67 @@
+import { log, store, Address, Bytes } from "@graphprotocol/graph-ts";
+
 import {
+  ClaimAdded as ClaimAddedEvent,
+  ClaimRemoved as ClaimRemovedEvent,
   KeyAdded as KeyAddedEvent,
   KeyRemoved as KeyRemovedEvent,
 } from '../../generated/Identity/Identity';
 
 import {
+  Claim,
   Identity,
   Key,
 } from '../../generated/schema';
 
-import { Bytes, Address } from "@graphprotocol/graph-ts";
+export function handleClaimAdded(event: ClaimAddedEvent): void {
+  let identity = Identity.load(event.address.toHexString());
+  if (identity == null) {
+    identity = new Identity(event.address.toHexString());
+    identity.address = event.address;
+
+    identity.save();
+  }
+
+  let claim = new Claim(createClaimID(event.address, event.params.claimId));
+  claim.identity = identity.id;
+  claim.claimID = event.params.claimId;
+  claim.data = event.params.data;
+  claim.topic = event.params.topic;
+  claim.scheme = event.params.scheme;
+  claim.signature = event.params.signature;
+  claim.issuer = event.params.issuer;
+  claim.uri = event.params.uri;
+
+  claim.save();
+}
+
+export function handleClaimChanged(event: ClaimAddedEvent): void {
+  let identity = Identity.load(event.address.toHexString());
+  if (identity == null) {
+    identity = new Identity(event.address.toHexString());
+    identity.address = event.address;
+
+    identity.save();
+  }
+
+  let claim = new Claim(createClaimID(event.address, event.params.claimId));
+  claim.identity = identity.id;
+  claim.claimID = event.params.claimId;
+  claim.data = event.params.data;
+  claim.topic = event.params.topic;
+  claim.scheme = event.params.scheme;
+  claim.signature = event.params.signature;
+  claim.issuer = event.params.issuer;
+  claim.uri = event.params.uri;
+
+  claim.save();
+}
+
+export function handleClaimRemoved(event: ClaimRemovedEvent): void {
+  let claimID = createClaimID(event.address, event.params.claimId);
+
+  store.remove('Claim', claimID);
+}
 
 export function handleKeyAdded(event: KeyAddedEvent): void {
   let identity = Identity.load(event.address.toHexString());
@@ -32,7 +85,9 @@ export function handleKeyAdded(event: KeyAddedEvent): void {
 
     identity.save();
   } else {
-    key.purposes.push(event.params.purpose.toI32());
+    let purposes = key.purposes;
+    purposes.push(event.params.purpose.toI32());
+    key.purposes = purposes;
 
     key.save();
     identity.save();
@@ -54,9 +109,19 @@ export function handleKeyRemoved(event: KeyRemovedEvent): void {
   if (keyIndex == -1) {
     return;
   }
-  key.purposes.splice(keyIndex, 1);
+  let purposes = key.purposes;
+  purposes.splice(keyIndex, 1);
+  key.purposes = purposes;
 
-  key.save();
+  if (key.purposes.length === 0) {
+    store.remove('Key', key.id);
+  } else {
+    key.save();
+  }
+}
+
+function createClaimID(identity: Address, claimID: Bytes): string{
+  return identity.toHexString().concat('-').concat(claimID.toHexString());
 }
 
 function createKeyID(identity: Address, key: Bytes): string {

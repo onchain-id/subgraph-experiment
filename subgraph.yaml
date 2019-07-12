@@ -21,6 +21,12 @@ dataSources:
         - name: Identity
           file: ./node_modules/@investorid/solidity/build/contracts/Identity.json
       eventHandlers:
+        - event: ClaimAdded(indexed bytes32,indexed uint256,uint256,indexed address,bytes,bytes,string)
+          handler: handleClaimAdded
+        - event: ClaimChanged(indexed bytes32,indexed uint256,uint256,indexed address,bytes,bytes,string)
+          handler: handleClaimAdded
+        - event: ClaimRemoved(indexed bytes32,indexed uint256,uint256,indexed address,bytes,bytes,string)
+          handler: handleClaimRemoved
         - event: KeyAdded(indexed bytes32,indexed uint256,indexed uint256)
           handler: handleKeyAdded
         - event: KeyRemoved(indexed bytes32,indexed uint256,indexed uint256)
