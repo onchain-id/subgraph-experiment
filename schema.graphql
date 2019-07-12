@@ -2,6 +2,7 @@ type Identity @entity {
   id: ID!
   address: Bytes!
   keys: [Key!]! @derivedFrom(field: "identity")
+  claims: [Claim!]! @derivedFrom(field: "identity")
 }
 
 type Key @entity {
@@ -10,4 +11,16 @@ type Key @entity {
   key: Bytes!
   purposes: [Int!]!
   identity: Identity!
+}
+
+type Claim @entity {
+  id: ID!
+  claimID: Bytes!
+  topic: BigInt!
+  scheme: BigInt!
+  issuer: Bytes!
+  signature: Bytes!
+  data: Bytes!
+  uri: String
+  identity: Identity
 }
