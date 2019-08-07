@@ -79,14 +79,14 @@ export function handleKeyAdded(event: KeyAddedEvent): void {
     key.identity = identity.id;
     key.key = event.params.key;
     key.keyType = event.params.keyType;
-    key.purposes = [event.params.purpose.toI32()];
+    key.purposes = [event.params.purpose];
 
     key.save();
 
     identity.save();
   } else {
     let purposes = key.purposes;
-    purposes.push(event.params.purpose.toI32());
+    purposes.push(event.params.purpose);
     key.purposes = purposes;
 
     key.save();
@@ -105,7 +105,7 @@ export function handleKeyRemoved(event: KeyRemovedEvent): void {
     return;
   }
 
-  let keyIndex = key.purposes.indexOf(event.params.purpose.toI32());
+  let keyIndex = key.purposes.indexOf(event.params.purpose);
   if (keyIndex == -1) {
     return;
   }

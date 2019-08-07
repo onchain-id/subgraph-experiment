@@ -9,7 +9,7 @@ type Key @entity {
   id: ID!
   keyType: BigInt!
   key: Bytes!
-  purposes: [Int!]!
+  purposes: [BigInt!]!
   identity: Identity!
 }
 
