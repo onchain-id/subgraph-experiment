@@ -6,7 +6,7 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: Identity
-    network: http://localhost:8545
+    network: kovan
     source:
       abi: Identity
     mapping:
@@ -17,6 +17,7 @@ dataSources:
       entities:
         - Identity
         - Key
+        - Claim
       abis:
         - name: Identity
           file: ./node_modules/@investorid/solidity/build/contracts/Identity.json

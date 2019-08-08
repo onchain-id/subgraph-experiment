@@ -6,10 +6,11 @@
   "license": "ISC",
   "scripts": {
     "codegen": "graph codegen",
-    "create-local": "graph create investorid/id --node http://127.0.0.1:8020",
+    "create-local": "graph create investorid/id --node http://localhost:8020",
+    "remove-local": "graph remove investorid/id --node http://localhost:8020",
     "build": "graph build",
-    "deploy-local": "graph deploy investorid/id --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020/",
-    "watch-local": "graph deploy investorid/id --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001"
+    "deploy-local": "graph deploy investorid/id --debug --ipfs http://localhost:5001 --node http://localhost:8020/",
+    "watch-local": "graph deploy investorid/id --watch --debug --node http://localhost:8020/ --ipfs http://localhost:5001"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "^0.13.3",
