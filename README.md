@@ -1,8 +1,8 @@
-![The Graph](./investorid_logo-small.png) ![The Graph](./graph_logo.svg)
+![The Graph](./onchainid_logo_small.png) ![The Graph](./graph_logo.svg)
 
-# InvestorID SubGraph for OpenGraph Protocol
+# OnchainID SubGraph for OpenGraph Protocol
 
-An [OpenGraph](https://thegraph.com/) protococol [SubGraph](https://thegraph.com/docs/define-a-subgraph) for [Blockchain Identities](https://github.com/ethereum/EIPs/issues/735) following the [InvestorID standard](https://investorid.org/).
+An [OpenGraph](https://thegraph.com/) protococol [SubGraph](https://thegraph.com/docs/define-a-subgraph) for [Blockchain Identities](https://github.com/ethereum/EIPs/issues/735) following the [OnchainID standard](https://onchainid.com/).
 
 ## Usage
 
@@ -14,7 +14,7 @@ An [OpenGraph](https://thegraph.com/) protococol [SubGraph](https://thegraph.com
   - Replace the `ethereum` environment variable of `docker-compose.yaml` by the endpoint of the network.
   - Run the docker-compose setup `docker-compose up`
   - 🎉
-- Clone this repository `git clone https://github.com/tokenyICO/investori-subgraph.git`
+- Clone this repository `git clone https://github.com/onchain-id/subgraph-experiment.git`
   - Install dependencies `yarn` (or `npm i`)
   - Run `yarn run codegen`
   - Run `yarn run create-local`
@@ -57,7 +57,7 @@ An [OpenGraph](https://thegraph.com/) protococol [SubGraph](https://thegraph.com
 - Init a new project `npm init`
 - Set up the `package.json` scripts. (Note, graph-cli might be required depending on your operating system and node configuration. If scripts commands don't work, try installing `yarn global add @graphprotocol/graph-cli`.)
   
-  Update the `domain/graph-name` part to mirror the name of the SubGraph, such as `investorid/id`.
+  Update the `domain/graph-name` part to mirror the name of the SubGraph, such as `onchainid/id`.
   
   ```json
   {
@@ -72,13 +72,13 @@ An [OpenGraph](https://thegraph.com/) protococol [SubGraph](https://thegraph.com
   ```
 - Install these dependencies: `yarn add --dev @graphprotocol/graph-cli @graphprotocol/graph-cli`
 - Load your contract ABIs (.json files) into a `./abis` folder.
-  > Instead, you may install a package containing these abis, like `yarn add --dev @investorid/solidity`. This is what was done for Identities contract loaded from the investoID solidity package.
+  > Instead, you may install a package containing these abis, like `yarn add --dev @onchain-id/solidity`. This is what was done for Identities contract loaded from the OnchainID solidity package.
 - Create a `subgraph.yaml` file to describe the SubGraph:
   
   ```yaml
   specVersion: 0.0.3
   description: Decentralized identities over the Ethereum Blockchain.
-  repository: https://github.com/investorid/investorid-subgraph
+  repository: https://github.com/onchain-id/subgraph-experiment
   schema:
     file: ./schema.graphql
   dataSources: []
@@ -146,7 +146,7 @@ An [OpenGraph](https://thegraph.com/) protococol [SubGraph](https://thegraph.com
           - Key
         abis:
           - name: Identity
-            file: ./node_modules/@investorid/solidity/build/contracts/Identity.json
+            file: ./node_modules/@onchain-id/solidity/build/contracts/Identity.json
         eventHandlers:
           - event: KeyAdded(indexed bytes32,indexed uint256,indexed uint256)
             handler: handleKeyAdded
