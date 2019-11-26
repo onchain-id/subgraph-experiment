@@ -6,9 +6,10 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: Identity
-    network: kovan
+    network: ${network}
     source:
       abi: Identity
+      startBlock: ${startBlock}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.3
