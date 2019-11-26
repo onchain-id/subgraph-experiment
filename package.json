@@ -1,20 +1,20 @@
 {
-  "name": "investorid-subgraph",
-  "description": "A subgraph for the Graph ፨ protocol and InvestorID - integrate blockchain identities easily.",
+  "name": "onchainid-subgraph",
+  "description": "A subgraph for the Graph ፨ protocol and OnchainID - integrate blockchain identities easily.",
   "author": "Tokeny Solutions",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "ISC",
   "scripts": {
     "codegen": "graph codegen",
-    "create-local": "graph create investorid/id --node http://localhost:8020",
-    "remove-local": "graph remove investorid/id --node http://localhost:8020",
+    "create-local": "graph create onchainid/id --node http://localhost:8020",
+    "remove-local": "graph remove onchainid/id --node http://localhost:8020",
     "build": "graph build",
-    "deploy-local": "graph deploy investorid/id --debug --ipfs http://localhost:5001 --node http://localhost:8020/",
-    "watch-local": "graph deploy investorid/id --watch --debug --node http://localhost:8020/ --ipfs http://localhost:5001"
+    "deploy-local": "graph deploy onchainid/id --debug --ipfs http://localhost:5001 --node http://localhost:8020/",
+    "watch-local": "graph deploy onchainid/id --watch --debug --node http://localhost:8020/ --ipfs http://localhost:5001"
   },
   "devDependencies": {
-    "@graphprotocol/graph-cli": "^0.13.3",
-    "@graphprotocol/graph-ts": "^0.13.0",
-    "@investorid/solidity": "^0.1.2"
+    "@graphprotocol/graph-cli": "^0.16.2",
+    "@graphprotocol/graph-ts": "^0.16.0",
+    "@investorid/solidity": "^0.2.0"
   }
 }
